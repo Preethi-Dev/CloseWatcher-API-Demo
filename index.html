@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CloseWatcher API</title>
+    <style>
+      .modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        padding: 10px;
+        margin: 2rem;
+        background-color: lightcyan;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        opacity: 0;
+      }
+      .modal-overlay.open {
+        opacity: 1;
+      }
+    </style>
+  </head>
+  <body>
+    <button>click me</button>
+    <div class="modal-overlay">
+      <h1>Overlay</h1>
+    </div>
+    <script>
+      const button = document.querySelector("button");
+      const modalOverlay = document.querySelector(".modal-overlay");
+      button.addEventListener("click", () => {
+        modalOverlay.classList.add("open");
+
+        const watcher = new CloseWatcher();
+        watcher.addEventListener("close", () => {
+          modalOverlay.classList.remove("open");
+        });
+      });
+    </script>
+  </body>
+</html>
